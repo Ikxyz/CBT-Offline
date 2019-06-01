@@ -1,0 +1,9 @@
+ {
+  "apiKey": "AIzaSyCjLIdkidYLhFL438ZV7x9P2afxuyFMwVc",
+   "authDomain": "computerbasetesting.firebaseapp.com",
+   "databaseURL": "https://computerbasetesting.firebaseio.com",
+ "projectId": ",computerbasetesting",
+   "storageBucket": "computerbasetesting.appspot.com",
+   "messagingSenderId": "51211773519",
+   "appId": "1:51211773519:web:04ffab7c0cbb80e5"
+}
