@@ -2,7 +2,7 @@ import 'package:cbt_offline/import.dart';
 
 class ExamBlocClass{
 
-  ExamModelClass _blocClass = ExamModelClass(school:'',class_:'',author: '',created: DateTime.now().toUtc().toString(),subject:'',time: '',answer: [],questions: []);
+  ExamModelClass _blocClass = ExamModelClass(schoolName:'',class_:'',author: '',subject:'',answer: [],question: []);
 
   final StreamController _examStreamController= new StreamController<ExamModelClass>();
 
@@ -20,8 +20,8 @@ if(e.runtimeType==ExamModelClass){
   _addQuestionSink.add(_blocClass);
 }
 if(e.runtimeType== QuestionModelClass){
-  final x = <QuestionModelClass>[if(_blocClass.questions!=null)..._blocClass.questions,e];
-  _blocClass.questions = x;
+  final x = <QuestionModelClass>[if(_blocClass.question!=null)..._blocClass.question,e];
+  _blocClass.question = x;
   _addQuestionSink.add(_blocClass);
 }
   }

@@ -12,59 +12,59 @@ class _ClientHomeState extends State<ClientHome> {
   PageController _questionPageController = PageController();
   List<QuestionModelClass> _question = [
     QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' atom', 'molecule ', ' living', ' matter']),
+        'Anything that occupies space and has mass is ______ ', [' atom', '*ans*molecule ', ' living', ' matter']),
     QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', ' all of these']),
+        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', '*ans* all of these']),
     QuestionModelClass(
-        ' Which of the following has a fixed volume?', [' perfume', ' stone', 'air ', ' smoke']),
+        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
     QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', ' molecules', 'solids ', ' none of these ']),
+        '______ flow more easily than liquids  ', [' gases', '*ans* molecules', 'solids ', ' none of these ']),
     QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', ' engineering', ' business', ' architecture']),
+        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', '*ans* engineering', ' business', ' architecture']),
 
 
     QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' atom', 'molecule ', ' living', ' matter']),
+        'Anything that occupies space and has mass is ______ ', [' *ans*atom', 'molecule ', ' living', ' matter']),
     QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', ' all of these']),
+        ' Non-living matter does not ______', [' move', 'Reproduce ', '*ans* grow', ' all of these']),
     QuestionModelClass(
-        ' Which of the following has a fixed volume?', [' perfume', ' stone', 'air ', ' smoke']),
+        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
     QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', ' molecules', 'solids ', ' none of these ']),
-    QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', ' engineering', ' business', ' architecture']),
-    QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' atom', 'molecule ', ' living', ' matter']),
-    QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', ' all of these']),
-    QuestionModelClass(
-        ' Which of the following has a fixed volume?', [' perfume', ' stone', 'air ', ' smoke']),
-    QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', ' molecules', 'solids ', ' none of these ']),
+        '______ flow more easily than liquids  ', [' gases', '*ans* molecules', 'solids ', ' none of these ']),
     QuestionModelClass(
         ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', ' engineering', ' business', ' architecture']),
+    QuestionModelClass(
+        'Anything that occupies space and has mass is ______ ', ['*ans* atom', 'molecule ', ' living', ' matter']),
+    QuestionModelClass(
+        ' Non-living matter does not ______', ['*ans* move', 'Reproduce ', ' grow', ' all of these']),
+    QuestionModelClass(
+        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
+    QuestionModelClass(
+        '______ flow more easily than liquids  ', ['*ans* gases', ' molecules', 'solids ', ' none of these ']),
+    QuestionModelClass(
+        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', '*ans* engineering', ' business', ' architecture']),
 
 
     QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' atom', 'molecule ', ' living', ' matter']),
+        'Anything that occupies space and has mass is ______ ', [' atom', '*ans*molecule ', ' living', ' matter']),
     QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', ' all of these']),
+        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', '*ans* all of these']),
     QuestionModelClass(
-        ' Which of the following has a fixed volume?', [' perfume', ' stone', 'air ', ' smoke']),
+        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
     QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', ' molecules', 'solids ', ' none of these ']),
+        '______ flow more easily than liquids  ', [' gases', '*ans* molecules', 'solids ', ' none of these ']),
     QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', ' engineering', ' business', ' architecture']),
+        ' Which of the following fields does the occupation of surgery fall into?', ['*ans*medicine ', ' engineering', ' business', ' architecture']),
   ];
   ExamModelClass _examModelClass;
   _ClientHomeState() {
     _examModelClass = ExamModelClass(
-        created: '',
+
         author: '',
-        questions: _question,
-        time: null,
+        question: _question,
+
         subject: 'English',
-        school: 'Faith Group of Schools',
+        schoolName: 'Faith Group of Schools',
         class_: '');
   }
   int _currentPage = 0;
@@ -345,7 +345,7 @@ class _ClientHomeState extends State<ClientHome> {
       height: _size.height * 0.8,
 
       child: PageView(
-        children: _examModelClass.questions.map((question) {
+        children: _examModelClass.question.map((question) {
           return _questionTemplate(
               questionIndex + 1, question.question, question.options);
         }).toList(),
@@ -357,7 +357,7 @@ class _ClientHomeState extends State<ClientHome> {
       width: _size.width,
       height: _size.height * 0.2,
 
-      child:Wrap(children: _examModelClass.questions.map((e){
+      child:Wrap(children: _examModelClass.question.map((e){
         return Chip(label: Text((_index++).toString()),deleteIcon: null,labelStyle: TextStyle(color: Colors.white),backgroundColor: Colors.grey,);
       }).toList(),) ,
     );

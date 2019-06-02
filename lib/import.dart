@@ -5,6 +5,7 @@ export 'package:flutter_web/material.dart';
 export 'dart:async';
 export 'package:crypto/crypto.dart';
 export 'package:sembast/sembast.dart';
+export 'package:random_string/random_string.dart';
 //import 'package:firebase/firebase.dart';
 
 

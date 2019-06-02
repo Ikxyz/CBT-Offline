@@ -143,7 +143,7 @@ class _QuestionComponentsState extends State<QuestionComponents> {
                   maxLines: 1,
                   obscureText: false,
                   onSaved: (val) {
-                   _examModelClass.school= val;
+                   _examModelClass.schoolName= val;
                   },
                   validator: isNotNull,
                   keyboardType: TextInputType.text,
@@ -304,8 +304,8 @@ class _QuestionComponentsState extends State<QuestionComponents> {
               Expanded(
                 flex: 2,
                 child: Container(
-                  child: data.data.questions==null?Offstage():ListView(
-                    children:data.data.questions.map((que) {
+                  child: data.data.question==null?Offstage():ListView(
+                    children:data.data.question.map((que) {
                       print(que.toJson());
                       return _questionTile(que.question, que.options);
                     }).toList(),
