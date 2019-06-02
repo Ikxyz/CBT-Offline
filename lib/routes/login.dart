@@ -1,4 +1,5 @@
 import 'package:cbt_offline/import.dart';
+import 'package:http/http.dart' as http;
 
 class LoginRoute extends StatefulWidget {
   const LoginRoute({Key key}) : super(key: key);
@@ -10,7 +11,7 @@ class _LoginRouteState extends State<LoginRoute>
     with SingleTickerProviderStateMixin {
   String email, pwd;
   final _loginKey = GlobalKey<FormState>();
-  final _scafoldState = GlobalKey<ScaffoldState>();
+  final _scaffoldState = GlobalKey<ScaffoldState>();
   bool _isWorking = false;
 
   @override
@@ -38,12 +39,16 @@ class _LoginRouteState extends State<LoginRoute>
     }
     ;
     _loginKey.currentState.save();
-/// TODO: Login Code Via API
+
     // if (_user != null) {
+      final output =await http.post('https://us-central1-computerbasetesting.cloudfunctions.net/login',body: {'username':email,'pwd':pwd});
+      final Map<String,dynamic> res =json.decode(output.body);
+      if(output.statusCode==200 && res['message']=="success" ){
+      await Navigator.of(context).pushNamed('Home');
 
-       Navigator.of(context).pushNamed('Home');
-
-    // }
+     }else{
+        showSnackBar(_scaffoldState, res['message']);
+      }
     _isWorkingFun(false);
   }
 
@@ -51,7 +56,7 @@ class _LoginRouteState extends State<LoginRoute>
   Widget build(BuildContext context) {
 
     return Scaffold(
-      key: _scafoldState,
+      key: _scaffoldState,
       body: Container(
         child: Center(
             child: ListView(

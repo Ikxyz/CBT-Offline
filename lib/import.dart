@@ -6,6 +6,7 @@ export 'dart:async';
 export 'package:crypto/crypto.dart';
 export 'package:sembast/sembast.dart';
 export 'package:random_string/random_string.dart';
+export 'dart:convert';
 //import 'package:firebase/firebase.dart';
 
 
@@ -57,3 +58,6 @@ export 'model/exam.dart';
 export 'client/client_home.dart';
 //
 //final db = firestore(FirebaseOptions());
+
+
+
