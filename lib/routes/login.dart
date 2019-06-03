@@ -17,7 +17,6 @@ class _LoginRouteState extends State<LoginRoute>
   @override
   void initState() {
     super.initState();
-
   }
 
   _isWorkingFun(bool e) {
@@ -32,29 +31,33 @@ class _LoginRouteState extends State<LoginRoute>
   }
 
   void _onLogin() async {
+    await Navigator.of(context).pushNamedAndRemoveUntil('Home', (Route<dynamic> route)=>false);
+
     _isWorkingFun(true);
     if (!_loginKey.currentState.validate()) {
-     _isWorkingFun(false);
+      _isWorkingFun(false);
       return;
     }
     ;
     _loginKey.currentState.save();
 
-    // if (_user != null) {
-      final output =await http.post('https://us-central1-computerbasetesting.cloudfunctions.net/login',body: {'username':email,'pwd':pwd});
-      final Map<String,dynamic> res =json.decode(output.body);
-      if(output.statusCode==200 && res['message']=="success" ){
-      await Navigator.of(context).pushNamed('Home');
-
-     }else{
-        showSnackBar(_scaffoldState, res['message']);
-      }
+    final output = await http.post(
+        'https://us-central1-computerbasetesting.cloudfunctions.net/login',
+        body: {'username': email, 'pwd': pwd});
+    final Map<String, dynamic> res = json.decode(output.body);
+    if (output.statusCode == 200 && res['message'] == "success") {
+      print(output.body);
+      storage['user'] = json.encode(res['data']);
+      print('${storage['user']}');
+      await Navigator.of(context).pushNamedAndRemoveUntil('Home', (Route<dynamic> route)=>false);
+    } else {
+      showSnackBar(_scaffoldState, res['message']);
+    }
     _isWorkingFun(false);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: _scaffoldState,
       body: Container(
@@ -132,7 +135,7 @@ class _LoginRouteState extends State<LoginRoute>
                       obscureText: true,
                       textInputAction: TextInputAction.done,
                       maxLines: 1,
-                     validator: isPassword,
+                      validator: isPassword,
                       onSaved: (val) {
                         pwd = val;
                       },
@@ -178,8 +181,6 @@ class _LoginRouteState extends State<LoginRoute>
                             )),
                       ),
                     ),
-
-
                   ],
                 ),
               ),

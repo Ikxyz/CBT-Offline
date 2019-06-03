@@ -37,6 +37,9 @@ class MyApp extends StatelessWidget {
 
           return CustomNavigate.slideUp(ClientHome());
         }
+        else if(setting.name == 'NewExam'){
+          return CustomNavigate.slideUp(QuestionComponents());
+        }
       },
     );
   }

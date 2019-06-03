@@ -59,7 +59,7 @@ class SplashScreen extends StatelessWidget {
                           ),
                         ),
                         RawMaterialButton(
-                          onPressed: () {   Navigator.of(context).pushNamedAndRemoveUntil('StartExam', (Route<dynamic> route)=>false);},
+                          onPressed: () {   Navigator.of(context).pushNamed('StartExam');},
                           elevation: 8,
                           textStyle: TextStyle(color: Colors.white),
                           fillColor: Colors.blue,

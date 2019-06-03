@@ -60,4 +60,9 @@ export 'client/client_home.dart';
 //final db = firestore(FirebaseOptions());
 
 
+import 'dart:html';
+
+Storage storage = window.localStorage;
+
+
 

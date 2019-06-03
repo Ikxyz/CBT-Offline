@@ -1,4 +1,7 @@
+import 'package:cbt_offline/import.dart';
+
 class QuestionModelClass {
+  String id;
   String _schoolName;
   String _class_;
   String _subject;
@@ -6,9 +9,10 @@ class QuestionModelClass {
   String _answer;
   List<String> _options;
 
-  QuestionModelClass([this._question,this._options,this._answer,this._schoolName, this._class_, this._subject,   ]);
+  QuestionModelClass([this.id,this._question,this._options,this._answer,this._schoolName, this._class_, this._subject,   ]);
 
   QuestionModelClass.fromJson(Map<String, dynamic> json) {
+    this.id = json['id'];
     this._schoolName = json['schoolName'];
     this._class_ = json['class_'];
     this._subject = json['subject'];
@@ -22,6 +26,7 @@ class QuestionModelClass {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id ?? '${randomAlphaNumeric(16)}${DateTime.now().toUtc().toIso8601String()}';
     data['schoolName'] = this._schoolName??'';
     data['class_'] = this._class_ ??"";
     data['subject'] = this._subject ?? '';

@@ -11,50 +11,10 @@ class _ClientHomeState extends State<ClientHome> {
   PageController _pageController = PageController();
   PageController _questionPageController = PageController();
   List<QuestionModelClass> _question = [
-    QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' atom', '*ans*molecule ', ' living', ' matter']),
-    QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', '*ans* all of these']),
-    QuestionModelClass(
-        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
-    QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', '*ans* molecules', 'solids ', ' none of these ']),
-    QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', '*ans* engineering', ' business', ' architecture']),
+    QuestionModelClass('gfgf',
+        'Anything that occupies space and has mass is ______ ', [' atom', 'molecule ', ' living', ' matter'],'molecule'),
 
 
-    QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' *ans*atom', 'molecule ', ' living', ' matter']),
-    QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', '*ans* grow', ' all of these']),
-    QuestionModelClass(
-        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
-    QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', '*ans* molecules', 'solids ', ' none of these ']),
-    QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', ' engineering', ' business', ' architecture']),
-    QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', ['*ans* atom', 'molecule ', ' living', ' matter']),
-    QuestionModelClass(
-        ' Non-living matter does not ______', ['*ans* move', 'Reproduce ', ' grow', ' all of these']),
-    QuestionModelClass(
-        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
-    QuestionModelClass(
-        '______ flow more easily than liquids  ', ['*ans* gases', ' molecules', 'solids ', ' none of these ']),
-    QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['medicine ', '*ans* engineering', ' business', ' architecture']),
-
-
-    QuestionModelClass(
-        'Anything that occupies space and has mass is ______ ', [' atom', '*ans*molecule ', ' living', ' matter']),
-    QuestionModelClass(
-        ' Non-living matter does not ______', [' move', 'Reproduce ', ' grow', '*ans* all of these']),
-    QuestionModelClass(
-        ' Which of the following has a fixed volume?', ['*ans* perfume', ' stone', 'air ', ' smoke']),
-    QuestionModelClass(
-        '______ flow more easily than liquids  ', [' gases', '*ans* molecules', 'solids ', ' none of these ']),
-    QuestionModelClass(
-        ' Which of the following fields does the occupation of surgery fall into?', ['*ans*medicine ', ' engineering', ' business', ' architecture']),
   ];
   ExamModelClass _examModelClass;
   _ClientHomeState() {

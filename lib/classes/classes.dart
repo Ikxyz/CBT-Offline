@@ -129,7 +129,7 @@ showSnackBar(GlobalKey<ScaffoldState> _scaffoldState, String content) {
   if (content == null) return;
   if (_scaffoldState.currentState == null) return;
   _scaffoldState.currentState.showSnackBar(SnackBar(
-    content: Text(content),
+    content: Text(content),duration: Duration(seconds: 3),
   ));
 }
 

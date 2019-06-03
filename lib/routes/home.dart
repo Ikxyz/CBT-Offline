@@ -22,18 +22,70 @@ class _HomeRouteState extends State<HomeRoute> {
                   elevation: 0,
                   actions: <Widget>[],
                 ),
-                body: _body[snapshotDrawerIndex.data],
-                drawer: Drawer(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: _drawer,
+                body:   Container(
+                  child: Center(
+                    child: Wrap(
+                      runSpacing: 50,
+                      crossAxisAlignment: WrapCrossAlignment.center,runAlignment: WrapAlignment.center,alignment: WrapAlignment.center,
+
+                      spacing: 50,
+                      children: <Widget>[
+                        RawMaterialButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('NewExam');
+
+                          },
+                          elevation: 8,
+                          textStyle: TextStyle(color: Colors.white),
+                          fillColor: Colors.blue,
+                          child: Container(
+                            width: 400,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Text('Setup/Add Examination',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold)),
+                                  Icon(
+                                    Icons.add_circle_outline,
+                                    size: 100,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        RawMaterialButton(
+                          onPressed: () {   Navigator.of(context).pushNamedAndRemoveUntil('ConductExam', (Route<dynamic> route)=>false);},
+                          elevation: 8,
+                          textStyle: TextStyle(color: Colors.white),
+                          fillColor: Colors.blue,
+                          child: Container(
+                            width: 400,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Text('Conduct Examination',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold)),
+                                  Icon(
+                                    Icons.play_circle_outline,
+                                    size: 100,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  elevation: 0,
-                ));
+                ),
+         );
           }
           return Container(
             child: Center(
