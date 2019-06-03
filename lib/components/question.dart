@@ -1,6 +1,7 @@
 import 'package:cbt_offline/import.dart';
 import 'package:cbt_offline/model/question.dart';
 import 'package:flutter_web/widgets.dart';
+import 'package:http/http.dart' as server;
 
 class QuestionComponents extends StatefulWidget {
   QuestionComponents({Key key}) : super(key: key);
@@ -9,6 +10,9 @@ class QuestionComponents extends StatefulWidget {
 }
 
 class _QuestionComponentsState extends State<QuestionComponents> {
+  _QuestionComponentsState(){
+    _examModelClass.author = getUser()['username'];
+   }
   int _currentStep = 0;
 
   final _addQuestionFormKey = GlobalKey<FormState>();
@@ -16,11 +20,13 @@ class _QuestionComponentsState extends State<QuestionComponents> {
   final _scaffoldState = GlobalKey<ScaffoldState>();
 
   ExamBlocClass _examBlocClass = ExamBlocClass();
-  ExamModelClass _examModelClass = ExamModelClass();
+  ExamModelClass _examModelClass = ExamModelClass(id: '${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}');
   QuestionModelClass _questionModelClass = QuestionModelClass(
       '${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}');
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       key: _scaffoldState,
       appBar: AppBar(
@@ -34,7 +40,7 @@ class _QuestionComponentsState extends State<QuestionComponents> {
           textColor: Colors.white,
         ),
         FlatButton.icon(
-          onPressed: () {},
+          onPressed: _onUploadExam,
           label: Text('Finish'),
           icon: Icon(Icons.check),
           textColor: Colors.white,
@@ -42,18 +48,57 @@ class _QuestionComponentsState extends State<QuestionComponents> {
       ],
 
       ),
-      body: ListView(
+      body: Builder(builder: (context)=>ListView(
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height,
             child: _stepper(),
           ),
         ],
-      ),
+      ),),
     );
   }
 
   //#region Logic
+/*
+* {
+    "id": "${data["id"]}",
+    "year": "${data["year"]}",
+    "schoolName": "${data["schoolName"]}",
+    "note": "${data["note"]}",
+    "class_": "${data["class_"]}",
+    "subject": "${data["subject"]}",
+    "timeStamp": "${data["timeStamp"]}",
+    "author": "${data["author"]}",
+    "lastModified": "${data["lastModified"]}",
+    "question":  _examModelClass.question.map((e)=>"${{
+      "id":"${e.id}",
+      "question":"${e.question}",
+      "answer":"${e.answer}",
+      "options":"${e.options}"
+    }}").toList().join("********************"),
+    "timeAllocated":"${data["timeAllocated"]}" }
+* */
+  _onUploadExam()async{
+    if (!_examinationGeneralInfoFormKey.currentState.validate()) return;
+    if (_examModelClass.question.isEmpty) {
+      showSnackBar(_scaffoldState, 'minimum of one question is requied');
+      return;
+    };
+
+    final String  data = json.encode(_examModelClass.toJson());
+    print('Data is ${data}');
+    final output = await server.post('https://us-central1-computerbasetesting.cloudfunctions.net/postExam',body:data).catchError((err){
+      print(err);
+    });
+    final result = jsonDecode(output.body);
+    if(output.statusCode==201&& result['message']=="success"){
+      showSnackBar(_scaffoldState, 'Upload Successful');
+    }else{
+      showSnackBar(_scaffoldState, result['message']);
+    }
+  }
+
   _onAddQuestion() {
     if (!_addQuestionFormKey.currentState.validate()) {
       return;
@@ -96,6 +141,23 @@ class _QuestionComponentsState extends State<QuestionComponents> {
 
 //#endregion
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //#region UI
   Widget _questionTile(QuestionModelClass mQue) {
     return ListTile(
@@ -103,20 +165,18 @@ class _QuestionComponentsState extends State<QuestionComponents> {
           label: Text('Edit'),
           icon: Icon(Icons.mode_edit),
           onPressed: () {
-            showBottomSheet(
-                context: context,
-                builder: (context) {
+            _scaffoldState.currentState.showBottomSheet((context) {
                   final _formKey = GlobalKey<FormState>();
                   final queController =
-                      TextEditingController(text: mQue.question);
+                  TextEditingController(text: mQue.question);
                   final ansController = TextEditingController(
                       text: mQue.options.map((f) {
-                    if (f == mQue.answer) {
-                      return '***${f}';
-                    } else {
-                      return f;
-                    }
-                  }).join());
+                        if (f == mQue.answer) {
+                          return '***${f}';
+                        } else {
+                          return f;
+                        }
+                      }).join(','));
                   return Container(
                     child: Card(
                       child: Form(
@@ -134,8 +194,8 @@ class _QuestionComponentsState extends State<QuestionComponents> {
                                     .textTheme
                                     .subhead
                                     .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
                               ),
                               TextFormField(
                                 controller: queController,
@@ -164,16 +224,16 @@ class _QuestionComponentsState extends State<QuestionComponents> {
                                 onSaved: (val) {
                                   mQue.options =
                                       val.trim().split(',').map((que_) {
-                                    String cleanStr = que_.trim().toLowerCase();
-                                    if (cleanStr.startsWith('***')) {
-                                      cleanStr =
-                                          cleanStr.replaceAll("***", '').trim();
-                                      mQue.answer = cleanStr;
-                                      return cleanStr;
-                                    } else {
-                                      return cleanStr;
-                                    }
-                                  }).toList();
+                                        String cleanStr = que_.trim().toLowerCase();
+                                        if (cleanStr.startsWith('***')) {
+                                          cleanStr =
+                                              cleanStr.replaceAll("***", '').trim();
+                                          mQue.answer = cleanStr;
+                                          return cleanStr;
+                                        } else {
+                                          return cleanStr;
+                                        }
+                                      }).toList();
                                 },
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
@@ -408,15 +468,15 @@ class _QuestionComponentsState extends State<QuestionComponents> {
                   onSaved: (val) {
                     _questionModelClass.options =
                         val.trim().split(',').map((que_) {
-                      String cleanStr = que_.trim().toLowerCase();
-                      if (cleanStr.startsWith('***')) {
-                        cleanStr = cleanStr.replaceAll("***", '').trim();
-                        _questionModelClass.answer = cleanStr;
-                        return cleanStr;
-                      } else {
-                        return cleanStr;
-                      }
-                    }).toList();
+                          String cleanStr = que_.trim().toLowerCase();
+                          if (cleanStr.startsWith('***')) {
+                            cleanStr = cleanStr.replaceAll("***", '').trim();
+                            _questionModelClass.answer = cleanStr;
+                            return cleanStr;
+                          } else {
+                            return cleanStr;
+                          }
+                        }).toList();
                     print(val);
                   },
                   keyboardType: TextInputType.emailAddress,
@@ -441,7 +501,7 @@ class _QuestionComponentsState extends State<QuestionComponents> {
   Widget _examPreviewWidget() {
     return StreamBuilder<ExamModelClass>(
       stream: _examBlocClass.getQuestionStream,
-      builder: (BuildContext context, data) {
+      builder: (BuildContext mcontext, data) {
         if (data.hasData) {
           print(data.data.toJson());
           return Container(
@@ -509,11 +569,11 @@ class _QuestionComponentsState extends State<QuestionComponents> {
                     child: data.data.question == null
                         ? Offstage()
                         : ListView(
-                            children: data.data.question.map((que) {
-                              print(que.toJson());
-                              return _questionTile(que);
-                            }).toList(),
-                          ),
+                      children: data.data.question.map((que) {
+                        print(que.toJson());
+                        return _questionTile(que);
+                      }).toList(),
+                    ),
                   ),
                 ),
               ],
@@ -530,7 +590,21 @@ class _QuestionComponentsState extends State<QuestionComponents> {
       },
     );
   }
-
+  List<Step>  get _steps =>[
+    new Step(
+        title: Text('Genera Examination Info'),
+        isActive: _currentStep == 0,
+        content: _examInfoWidget()),
+    new Step(
+        title: Text('Add Question'),
+        isActive: _currentStep == 1,
+        content: _addQuestionWidget()),
+    new Step(
+        title: Text('Preview Exam Question'),
+        isActive: _currentStep == 2,
+        state: StepState.editing,
+        content: _examPreviewWidget())
+  ];
   Widget _stepper() {
     return Stepper(
       currentStep: _currentStep,
@@ -547,22 +621,13 @@ class _QuestionComponentsState extends State<QuestionComponents> {
     );
   }
 
-  List<Step> get _steps => [
-        new Step(
-            title: Text('Genera Examination Info'),
-            isActive: _currentStep == 0,
-            content: _examInfoWidget()),
-        new Step(
-            title: Text('Add Question'),
-            isActive: _currentStep == 1,
-            content: _addQuestionWidget()),
-        new Step(
-            title: Text('Preview Exam Question'),
-            isActive: _currentStep == 2,
-            state: StepState.editing,
-            content: _examPreviewWidget())
-      ];
+
 //#endregion
+
+
+
+
+
   @override
   void dispose() {
     _examBlocClass.dispose();

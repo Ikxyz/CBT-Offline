@@ -60,9 +60,10 @@ export 'client/client_home.dart';
 //final db = firestore(FirebaseOptions());
 
 
+import 'dart:convert';
 import 'dart:html';
+
 
 Storage storage = window.localStorage;
 
-
-
+Map<String,dynamic> getUser()=>jsonDecode(storage['user']);
