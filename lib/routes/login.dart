@@ -31,7 +31,7 @@ class _LoginRouteState extends State<LoginRoute>
   }
 
   void _onLogin() async {
-   // await Navigator.of(context).pushNamedAndRemoveUntil('Home', (Route<dynamic> route)=>false);
+    await Navigator.of(context).pushNamedAndRemoveUntil('Home', (Route<dynamic> route)=>false);
 
     _isWorkingFun(true);
     if (!_loginKey.currentState.validate()) {

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 
           return CustomNavigate.slideUp(ClientHome());
         }
-        else if(setting.name == 'NewExam'){
+        else if(setting.name == 'NewExamSheet'){
           return CustomNavigate.slideUp(NewExamSheetComponents());
         }
         else if(setting.name == 'ConductExam'){

@@ -58,7 +58,7 @@ class _HomeRouteState extends State<HomeRoute> {
                           ),
                         ),
                         RawMaterialButton(
-                          onPressed: () {   Navigator.of(context).pushNamedAndRemoveUntil('ConductExam', (Route<dynamic> route)=>false);},
+                          onPressed: () { Navigator.of(context).pushNamed('ConductExam');     },
                           elevation: 8,
                           textStyle: TextStyle(color: Colors.white),
                           fillColor: Colors.blue,
