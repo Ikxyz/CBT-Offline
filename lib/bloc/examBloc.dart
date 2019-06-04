@@ -2,20 +2,20 @@ import 'package:cbt_offline/import.dart';
 
 class ExamBlocClass{
 
-  ExamModelClass _blocClass = ExamModelClass(id:'${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}', schoolName:'',class_:'',author: '',subject:'',question: [], );
+  ExamSheetModelClass _blocClass = ExamSheetModelClass(id:'${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}', schoolName:'',class_:'',author: '',subject:'',question: [], );
 
-  final StreamController _examStreamController= new StreamController<ExamModelClass>();
+  final StreamController _examStreamController= new StreamController<ExamSheetModelClass>();
 
   List<QuestionModelClass> get questionList => _blocClass.question;
-  Stream<ExamModelClass> get getQuestionStream => _examStreamController.stream;
-  StreamSink<ExamModelClass> get _addQuestionSink => _examStreamController.sink;
+  Stream<ExamSheetModelClass> get getQuestionStream => _examStreamController.stream;
+  StreamSink<ExamSheetModelClass> get _addQuestionSink => _examStreamController.sink;
 
   ExamBlocClass(){
     updateExam(_blocClass);
    // getQuestionStream.listen(updateExam);
   }
 
-  updateExam(ExamModelClass e){
+  updateExam(ExamSheetModelClass e){
   _blocClass = e;
   _addQuestionSink.add(_blocClass);
   }

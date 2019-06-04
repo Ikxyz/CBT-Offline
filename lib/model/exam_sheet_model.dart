@@ -2,17 +2,17 @@ import 'package:cbt_offline/import.dart';
 
 
 
-class ExamModelClass {
+class ExamSheetModelClass {
   String id,year,timeStamp,lastModified,timeAllocated,note;
   String schoolName;
   String class_;
   String subject;
   String author;
   List<QuestionModelClass> question;
-  ExamModelClass({@required this.id,this.schoolName, this.class_, this.subject,this.note, this.timeStamp, this.author, this.lastModified,  this.question,this.year,this.timeAllocated});
+  ExamSheetModelClass({@required this.id,this.schoolName, this.class_, this.subject,this.note, this.timeStamp, this.author, this.lastModified,  this.question,this.year,this.timeAllocated});
 
-  factory ExamModelClass.fromJson(Map<String, dynamic> json) {
-  return ExamModelClass(
+  factory ExamSheetModelClass.fromJson(Map<String, dynamic> json) {
+  return ExamSheetModelClass(
   id: json['id'] as String,
   schoolName: json['schoolName'] as String,
   class_: json['class_'] as String,

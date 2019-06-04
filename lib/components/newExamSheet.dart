@@ -3,14 +3,14 @@ import 'package:cbt_offline/model/question.dart';
 import 'package:flutter_web/widgets.dart';
 import 'package:http/http.dart' as server;
 
-class QuestionComponents extends StatefulWidget {
-  QuestionComponents({Key key}) : super(key: key);
+class NewExamSheetComponents extends StatefulWidget {
+  NewExamSheetComponents({Key key}) : super(key: key);
 
-  _QuestionComponentsState createState() => _QuestionComponentsState();
+  _NewExamSheetComponentsState createState() => _NewExamSheetComponentsState();
 }
 
-class _QuestionComponentsState extends State<QuestionComponents> {
-  _QuestionComponentsState(){
+class _NewExamSheetComponentsState extends State<NewExamSheetComponents> {
+  _NewExamSheetComponentsState(){
     _examModelClass.author = getUser()['username'];
    }
   int _currentStep = 0;
@@ -20,7 +20,7 @@ class _QuestionComponentsState extends State<QuestionComponents> {
   final _scaffoldState = GlobalKey<ScaffoldState>();
 
   ExamBlocClass _examBlocClass = ExamBlocClass();
-  ExamModelClass _examModelClass = ExamModelClass(id: '${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}');
+  ExamSheetModelClass _examModelClass = ExamSheetModelClass(id: '${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}');
   QuestionModelClass _questionModelClass = QuestionModelClass(
       '${randomAlphaNumeric(16)}${DateTime.now().toUtc().millisecondsSinceEpoch}');
   @override
@@ -499,7 +499,7 @@ class _QuestionComponentsState extends State<QuestionComponents> {
   }
 
   Widget _examPreviewWidget() {
-    return StreamBuilder<ExamModelClass>(
+    return StreamBuilder<ExamSheetModelClass>(
       stream: _examBlocClass.getQuestionStream,
       builder: (BuildContext mcontext, data) {
         if (data.hasData) {

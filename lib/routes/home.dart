@@ -32,7 +32,7 @@ class _HomeRouteState extends State<HomeRoute> {
                       children: <Widget>[
                         RawMaterialButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed('NewExam');
+                            Navigator.of(context).pushNamed('NewExamSheet');
 
                           },
                           elevation: 8,
@@ -113,7 +113,7 @@ class _HomeRouteState extends State<HomeRoute> {
 
   List<Widget> _body = [
     DashboardComponents(),
-    QuestionComponents(),
+    NewExamSheetComponents(),
     PerpareResultComponents(),
     WhitePaperComponents(),
     SettingComponents()

@@ -16,9 +16,9 @@ class _ClientHomeState extends State<ClientHome> {
 
 
   ];
-  ExamModelClass _examModelClass;
+  ExamSheetModelClass _examSheetModelClass;
   _ClientHomeState() {
-    _examModelClass = ExamModelClass(
+    _examSheetModelClass = ExamSheetModelClass(
 
         author: '',
         question: _question,
@@ -305,7 +305,7 @@ class _ClientHomeState extends State<ClientHome> {
       height: _size.height * 0.8,
 
       child: PageView(
-        children: _examModelClass.question.map((question) {
+        children: _examSheetModelClass.question.map((question) {
           return _questionTemplate(
               questionIndex + 1, question.question, question.options);
         }).toList(),
@@ -317,7 +317,7 @@ class _ClientHomeState extends State<ClientHome> {
       width: _size.width,
       height: _size.height * 0.2,
 
-      child:Wrap(children: _examModelClass.question.map((e){
+      child:Wrap(children: _examSheetModelClass.question.map((e){
         return Chip(label: Text((_index++).toString()),deleteIcon: null,labelStyle: TextStyle(color: Colors.white),backgroundColor: Colors.grey,);
       }).toList(),) ,
     );

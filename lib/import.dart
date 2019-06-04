@@ -39,11 +39,12 @@ export 'classes/start_up.dart';
 export 'styles/styles.dart';
 
 // @Componnets
-export 'components/question.dart';
+export 'components/newExamSheet.dart';
 export 'components/white_paper.dart';
 export 'components/setting.dart';
 export 'components/prepare_result.dart';
 export 'components/dashboard.dart';
+export 'components/conductExam.dart';
 
 // @Bloc
 export 'bloc/drawer_index.dart';
@@ -52,7 +53,7 @@ export 'bloc/examBloc.dart';
 
 // @Model
 export 'model/question.dart';
-export 'model/exam.dart';
+export 'model/exam_sheet_model.dart';
 
 // @Client
 export 'client/client_home.dart';
