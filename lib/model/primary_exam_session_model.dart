@@ -2,36 +2,51 @@ import 'package:cbt_offline/import.dart';
 
 class PrimaryExamSessionModel {
   String id;
-  String author;
   String finished;
   String startTime;
   String endTime;
   String examinationId;
-  List<UsersProfileClass> student;
+  String overSite;
+  bool hasEnded,hasStarted;
 
-  PrimaryExamSessionModel({this.id, this.author, this.finished, this.startTime, this.endTime, this.examinationId, this.student});
+  //List<String> pausedTime ;
+ // List<UsersProfileClass> student;
+
+  PrimaryExamSessionModel({this.id, this.finished, this.startTime, this.endTime, this.examinationId,this.overSite,this.hasStarted,this.hasEnded});
 
   PrimaryExamSessionModel.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
-    this.author = json['author'];
     this.finished = json['finished'];
     this.startTime = json['startTime'];
     this.endTime = json['endTime'];
     this.examinationId = json['examinationId'];
-    this.student  = json['student'].map((e)=>UsersProfileClass.fromJson(e)).toList();
+    this.overSite = json['overSite'];
+   // this.pausedTime = (json['pausedTime'] as List<String>).map((f)=>f.toString()).toList();
+
+    this.hasStarted = json['hasStarted'];this.hasEnded = json['hasStarted'];
 
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['author'] = this.author;
     data['finished'] = this.finished;
     data['startTime'] = this.startTime;
     data['endTime'] = this.endTime;
     data['examinationId'] = this.examinationId;
-    data['student'] = this.student.map((e)=> e.toJson(e)).toList();
+    data['overSite'] =this.overSite;
+  //  data['pausedTime'] = this.pausedTime;
+    data['hasStarted'] = this.hasStarted;
+    data['hasEnded'] = this.hasEnded??false;
     return data;
   }
+
+
+
+
+
+
+
+
 
 }

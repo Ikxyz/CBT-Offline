@@ -4,6 +4,7 @@ class UsersProfileClass {
   String firstName,
       lastName,
       email,
+      username,
       tel,
       address,
       city,
@@ -21,8 +22,8 @@ class UsersProfileClass {
   bool isAdmin, isAgent, isMember, isDev, isVerified, isOrg;
   dynamic online;
   UsersProfileClass(
-      {@required this.email,
-      @required this.address,
+      {@required this.username,this.email,
+      this.address,
       this.uid,
       this.firstName,
       this.lastName,
@@ -56,6 +57,7 @@ class UsersProfileClass {
     return UsersProfileClass(
         firstName: map['firstName'],
         lastName: map['lastName'],
+        username: map['username'],
         email: map['email'],
         pwd: map['pwd'],
         retypePwd: map['retypePwd'],
@@ -85,38 +87,39 @@ class UsersProfileClass {
         online: map['online']);
   }
 
-  static Map<String, dynamic> toJson(UsersProfileClass e) {
-    return {
-      'firstName': e.firstName,
-      'lastName': e.lastName,
-      'address': e.address,
-      'email': e.email,
-      'state': e.state,
-      'tel': e.tel,
-      'retypePwd': e.retypePwd,
-      'pwd': e.pwd,
-      'isAdmin': e.isAdmin,
-      'isAgent': e.isAgent,
-      'isOrg': e.isOrg,
-      'isDev': e.isDev,
-      'isMember': e.isMember,
-      'city': e.city,
-      'country': e.country,
-      'zip': e.zip,
-      'passport': e.passport,
-      'identification': e.identification,
-      'utilityBill': e.utilityBill,
-      'uid': e.uid,
-      'time': e.time,
-      'rating': e.rating,
-      'online': e.online,
-      'likes': e.likes,
-      'followers': e.followers,
-      'following': e.following,
-      'isVerified': e.isVerified,
-      'latitude': e.latitude,
-      'longitude': e.longitude
-    };
+    Map<String, dynamic> toJson() {
+      return {
+        'firstName': this.firstName,
+        'lastName': this.lastName,
+        'address': this.address,
+        'username': this.username,
+        'email': this.email,
+        'state': this.state,
+        'tel': this.tel,
+        'retypePwd': this.retypePwd,
+        'pwd': this.pwd,
+        'isAdmin': this.isAdmin,
+        'isAgent': this.isAgent,
+        'isOrg': this.isOrg,
+        'isDev': this.isDev,
+        'isMember': this.isMember,
+        'city': this.city,
+        'country': this.country,
+        'zip': this.zip,
+        'passport': this.passport,
+        'identification': this.identification,
+        'utilityBill': this.utilityBill,
+        'uid': this.uid,
+        'time': this.time,
+        'rating': this.rating,
+        'online': this.online,
+        'likes': this.likes,
+        'followers': this.followers,
+        'following': this.following,
+        'isVerified': this.isVerified,
+        'latitude': this.latitude,
+        'longitude': this.longitude
+      };
   }
 
     String toStr() {
@@ -125,6 +128,7 @@ class UsersProfileClass {
 
      firstName: ${this.firstName},
         lastName: ${this.lastName},
+        username: ${this.username},
         email: ${this.email},
         pwd: ${this.pwd},
         retypePwd: ${this.retypePwd},

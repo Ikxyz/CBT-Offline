@@ -45,6 +45,7 @@ export 'components/setting.dart';
 export 'components/prepare_result.dart';
 export 'components/dashboard.dart';
 export 'components/conductExam.dart';
+export 'components/primary_exam_session.dart';
 
 // @Bloc
 export 'bloc/drawer_index.dart';
@@ -54,9 +55,13 @@ export 'bloc/examBloc.dart';
 // @Model
 export 'model/question.dart';
 export 'model/exam_sheet_model.dart';
+export 'model/primary_exam_session_model.dart';
+export 'model/student_exam_session.dart';
 
 // @Client
 export 'client/client_home.dart';
+export 'client/continue_student_exam_session.dart';
+export 'client/student_exam_sheet.dart';
 //
 //final db = firestore(FirebaseOptions());
 

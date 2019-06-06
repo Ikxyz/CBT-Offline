@@ -81,6 +81,30 @@ class _HomeRouteState extends State<HomeRoute> {
                             ),
                           ),
                         ),
+                        RawMaterialButton(
+                          onPressed: () { Navigator.of(context).pushNamed('OnGoingExam');     },
+                          elevation: 8,
+                          textStyle: TextStyle(color: Colors.white),
+                          fillColor: Colors.blue,
+                          child: Container(
+                            width: 400,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Text('Examination in Progress',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold)),
+                                  Icon(
+                                    Icons.access_time,
+                                    size: 100,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

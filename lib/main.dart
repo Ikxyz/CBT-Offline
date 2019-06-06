@@ -42,6 +42,13 @@ class MyApp extends StatelessWidget {
         }
         else if(setting.name == 'ConductExam'){
           return CustomNavigate.slideUp(ConductExamComponent());
+        }     else if(setting.name == 'OnGoingExam'){
+          return CustomNavigate.slideUp(ConductExamComponent());
+        }
+        else if(setting.name.startsWith('PrimaryExamSession') ){
+          String id = setting.name.split('/')[1];
+          print('ID $id');
+          return CustomNavigate.slideUp(PrimaryExamSessionComponent(id));
         }
       },
     );

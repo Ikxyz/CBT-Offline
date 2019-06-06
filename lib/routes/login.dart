@@ -31,6 +31,7 @@ class _LoginRouteState extends State<LoginRoute>
   }
 
   void _onLogin() async {
+    storage['user'] = json.encode({"username":"ikben"});
     await Navigator.of(context).pushNamedAndRemoveUntil('Home', (Route<dynamic> route)=>false);
 
     _isWorkingFun(true);
